@@ -139,7 +139,7 @@ public class Implementa {
         if (listasimple.vacia()) {//si no se a creado la lista sencilla no tiene caso crear la lista doble
             System.out.println("No se puede crear");
         } else {
-            if (!listadoble.vacia()) {//si ya se creo la lista doble para que no haiga duplicados de datos solo sera una vez hasta que se genere de nuevo los datos
+            if (!listadoble.vacia()) {//si ya se creo la lista doble para que no haya duplicados de datos solo sera una vez hasta que se genere de nuevo los datos
                 System.out.println("Ya se a creado");
             } else {
                 for (int i = 0; i < tamaño; i++) {
