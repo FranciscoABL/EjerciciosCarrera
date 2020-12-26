@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.2/dist/sweetalert2.min.css">  
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+      </head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+          <v-card class="mx-auto mt-5" max-width="1200">
+            <v-btn rounded color="blue acent" @click="formNuevo()">Crear</v-btn>
+            <template>
+                <v-simple-table dark class="mt-5">
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">ID</th>
+                        <th class="text-left">NOMBRE</th>
+                        <th class="text-left">PROMEDIO</th>
+                        <th class="text-left">EDAD</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="alumno in alumnos"
+                        :key="alumno.id"
+                      >
+                        <td>{{ alumno.id }}</td>
+                        <td>{{ alumno.nombre }}</td>
+                        <td>{{ alumno.promedio }}</td>
+                        <td>{{ alumno.edad }}</td>
+                        <td>
+                            <v-btn class="teal accent-4" dark @click="formEditar(alumno.id, alumno. nombre, alumno.promedio, alumno.edad)">Editar</v-btn>
+                            <v-btn class="error" dark @click="borrar(alumno.id)">Borrar</v-btn>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </template>
+        </v-card>
+        <!-- Componente de Diálogo para CREAR y EDITAR -->
+      <v-dialog v-model="dialog" max-width="500">        
+        <v-card>
+          <v-card-title class="blue-grey darken-1 white--text">ALUMNO</v-card-title>    
+          <v-card-text>            
+            <v-form>             
+              <v-container>
+                <v-row>
+                  <input v-model="alumno.id" hidden></input>
+                  <v-col cols="12" md="4">
+                    <v-text-field v-model="alumno.nombre" label="nombre" solo required>{{alumno.nombre}}</v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="4">
+                    <v-text-field v-model="alumno.promedio" label="promedio" type="number" prefix="%" solo required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="4">
+                    <v-text-field v-model="alumno.edad" label="edad" type="number" solo required></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>            
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog=false">Cancelar</v-btn>
+            <v-btn @click="guardar()" type="submit" color="indigo" dark>Guardar</v-btn>
+          </v-card-actions>
+          </v-form>
+        </v-card>
+      </v-dialog>
+
+      </v-main>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.2/dist/sweetalert2.all.min.js"></script>
+  <script>
+    var url = "http://localhost/api/crud.php";
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data() {
+          return {
+              alumnos:[],
+              dialog: false,
+              operacion: '',
+              alumno:{
+                  id:null,
+                  nombre:'',
+                  promedio:'',
+                  edad:''
+              }
+          }
+      },
+      created() {
+          this.mostrar();
+      },
+      /*Crud basico con post , en estos casos con una api rest se usa , Obtener:get ,Actualizar:put, Eliminar:delete,Crear:post */
+      methods:{          
+            //MÉTODOS PARA EL CRUD
+            mostrar:function(){
+              axios.post(url,{opcion:1})
+              .then(response =>{
+                this.alumnos = response.data;                   
+              })
+            },
+            crear:function(){                
+                axios.post(url, {opcion:2, nombre:this.alumno.nombre, promedio:this.alumno.promedio, edad:this.alumno.edad })
+                .then(response =>{
+                  this.mostrar();
+                });   
+                this.alumno.nombre="";
+                this.alumno.promedio="";
+                this.alumno.edad="";
+            },  
+            editar:function(id, nombre, promedio, edad){
+              axios.post(url, {opcion:3, id:this.alumno.id, nombre:this.alumno.nombre, promedio:this.alumno.promedio, edad:this.alumno.edad})
+                  .then(response =>{
+                    this.mostrar();
+              }); 
+            },             
+            borrar:function(id){
+             Swal.fire({
+                title: '¿Confirma eliminar el registro?',   
+                confirmButtonText: `Confirmar`,                  
+                showCancelButton: true,                          
+              }).then((result) => {                
+                if (result.isConfirmed) {      
+                      axios.post(url, {opcion:4, id:id}).then(response =>{           
+                          this.mostrar();
+                       });      
+                  Swal.fire('¡Eliminado!', '', 'success')
+                } else if (result.isDenied) {                  
+                }
+              });              
+            },
+
+            //Botones y formularios
+            guardar:function(){
+              if(this.operacion=='crear'){
+                this.crear();                
+              }
+              if(this.operacion=='editar'){ 
+                this.editar();                           
+              }
+              this.dialog=false;                        
+            }, 
+            formNuevo:function () {              
+              this.dialog=true;
+              this.operacion='crear';
+              this.alumno.nombre='';                           
+              this.alumno.promedio='';
+              this.alumno.edad='';
+            },
+            formEditar:function(id, nombre, promedio, edad){                              
+              //capturamos los datos del registro seleccionado y los mostramos en el formulario
+              this.alumno.id = id;
+              this.alumno.nombre = nombre;                            
+              this.alumno.promedio = promedio;
+              this.alumno.edad = edad;                      
+              this.dialog=true;                            
+              this.operacion='editar';
+            }
+       }      
+    });
+  </script>
+</body>
+</html>
