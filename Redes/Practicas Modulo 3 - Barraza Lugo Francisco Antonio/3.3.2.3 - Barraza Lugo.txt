@@ -1,0 +1,95 @@
+
+//S1
+Enable
+configure terminal
+hostname S1
+no ip domain-lookup
+enable secret class
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+banner motd #
+**************************************************
+******* ACCESO SOLO A PERSONAL AUTORIZADO*********
+******* SE APLICARAN SANCIONES*******************
+**************************************************
+#
+vlan 10
+name User
+vlan 99
+name Management
+int fa0/6
+switchport mode access
+no sh
+switchport access vlan 10
+exit
+int range fa0/1,fa0/3
+switchport mode trunk
+switchport trunk native vlan 99
+no sh
+spanning-tree vlan 1,10,99 root primary
+spanning-tree mode rapid-pvst
+//S2
+Enable
+configure terminal
+hostname S2
+no ip domain-lookup
+enable secret class
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+banner motd #
+**************************************************
+******* ACCESO SOLO A PERSONAL AUTORIZADO*********
+******* SE APLICARAN SANCIONES*******************
+**************************************************
+#
+vlan 10
+name User
+vlan 99
+name Management
+exit
+int range fa0/1,fa0/3
+switchport mode trunk
+switchport trunk native vlan 99
+no sh
+spanning-tree vlan 1,10,99 root secondary
+spanning-tree mode rapid-pvst
+//S3
+Enable
+configure terminal
+hostname S3
+no ip domain-lookup
+enable secret class
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+banner motd #
+**************************************************
+******* ACCESO SOLO A PERSONAL AUTORIZADO*********
+******* SE APLICARAN SANCIONES*******************
+**************************************************
+#
+vlan 10
+name User
+vlan 99
+name Management
+int fa0/18
+switchport mode access
+no sh
+switchport access vlan 10
+exit
+int range fa0/1,fa0/3
+switchport mode trunk
+switchport trunk native vlan 99
+no sh
+spanning-tree mode rapid-pvst

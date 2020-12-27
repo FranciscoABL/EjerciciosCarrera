@@ -1,0 +1,23 @@
+//Practica 6.2.2.4
+//Barraza Lugo Francisco Antonio
+//R1
+router eigrp 1
+network 172.16.1.0 0.0.0.255
+network 172.16.3.0 0.0.0.3
+network 192.168.10.4 0.0.0.3
+passive-interface g0/0
+no auto-summary
+//R2
+router eigrp 1
+network 172.16.2.0 0.0.0.255
+network 172.16.3.0 0.0.0.3
+network 192.168.10.8 0.0.0.3
+passive-interface g0/0
+no auto-summary
+//R3
+router eigrp 1
+network 192.168.1.0 0.0.0.255
+network 192.168.10.4 0.0.0.3
+network 192.168.10.8 0.0.0.3
+passive-interface g0/0
+no auto-summary

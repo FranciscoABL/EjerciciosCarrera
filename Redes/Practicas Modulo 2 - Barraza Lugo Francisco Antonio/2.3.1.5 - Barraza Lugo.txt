@@ -1,0 +1,25 @@
+//MLS
+interface g0/2
+no switchport
+ip address 209.165.200.225 255.255.255.252
+no sh
+exit
+vlan 10
+name Staff
+vlan 20
+name Student
+vlan 30
+name Faculty
+int vlan 10
+ip address 192.168.10.254 255.255.255.0
+exit
+int vlan 20
+ip address 192.168.20.254 255.255.255.0
+exit
+int vlan 30
+ip address 192.168.30.254 255.255.255.0
+exit
+int vlan 99
+ip address 192.168.99.254 255.255.255.0
+exit
+ip routing

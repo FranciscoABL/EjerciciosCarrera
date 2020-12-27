@@ -1,0 +1,117 @@
+//Practica 6.2.2.5
+//Barraza Lugo Francisco Antonio
+//R1
+Enable
+configure terminal
+hostname R1
+no ip domain-lookup
+enable secret class
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+banner motd #
+**************************************************
+******* ACCESO SOLO A PERSONAL AUTORIZADO*********
+******* SE APLICARAN SANCIONES*******************
+**************************************************
+#
+int gi0/0
+ip addres 192.168.1.1 255.255.255.0 
+no sh
+int se0/0/0
+ip addres 10.1.1.1 255.255.255.252
+clock rate 120000
+no sh
+int se0/0/1 
+ip addres 10.3.3.1 255.255.255.252
+no sh
+router eigrp 10
+network 10.1.1.0 0.0.0.3
+network 192.168.1.0 0.0.0.255
+network 10.3.3.0 0.0.0.3
+interface s0/0/0
+bandwidth 2000
+interface s0/0/1
+bandwidth 64
+router eigrp 10
+passive-interface g0/0
+//R2
+Enable
+configure terminal
+hostname R2
+no ip domain-lookup
+enable secret class
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+banner motd #
+**************************************************
+******* ACCESO SOLO A PERSONAL AUTORIZADO*********
+******* SE APLICARAN SANCIONES*******************
+**************************************************
+#
+int gi0/0
+ip addres 192.168.2.1 255.255.255.0 
+no sh
+int se0/0/0
+ip addres 10.1.1.2 255.255.255.252
+no sh
+int se0/0/1 
+ip addres 10.2.2.2 255.255.255.252
+clock rate 120000
+no sh
+router eigrp 10
+network 10.1.1.0 0.0.0.3
+network 192.168.2.0 0.0.0.255
+network 10.2.2.0 0.0.0.3
+interface s0/0/0
+bandwidth 2000
+interface s0/0/1
+bandwidth 2000
+router eigrp 10
+passive-interface g0/0
+//R3
+Enable
+configure terminal
+hostname R3
+no ip domain-lookup
+enable secret class
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+banner motd #
+**************************************************
+******* ACCESO SOLO A PERSONAL AUTORIZADO*********
+******* SE APLICARAN SANCIONES*******************
+**************************************************
+#
+int gi0/0
+ip addres 192.168.3.1 255.255.255.0 
+no sh
+int se0/0/0
+ip addres 10.3.3.2 255.255.255.252
+clock rate 120000
+no sh
+int se0/0/1 
+ip addres 10.2.2.1 255.255.255.252
+clock rate 120000
+no sh
+router eigrp 10
+network 10.2.2.0 0.0.0.3
+network 192.168.3.0 0.0.0.255
+network 10.3.3.0 0.0.0.3
+interface s0/0/0
+bandwidth 64
+interface s0/0/1
+bandwidth 2000
+router eigrp 10
+passive-interface g0/0
