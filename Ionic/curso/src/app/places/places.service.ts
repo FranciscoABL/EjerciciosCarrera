@@ -35,19 +35,18 @@ export class PlacesService {
       imgUrl,
       comments:[],
       id:this.places.length+1+""
-    })
+    });
   }
   deletePlace(placeId:string){
-    this.places.filter(place=>{
-      place.id!==placeId
-    })
+    this.places=this.places.filter(place=>{
+      return place.id!==placeId
+    });
   }
   getPlaceById(placeId:string){
     return {
       ...this.places.find(place=>{
         return place.id===placeId
       })
-    }
+    };
   }
-
 }

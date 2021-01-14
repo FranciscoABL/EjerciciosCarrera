@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>places</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Places</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,5 +14,9 @@
     {{place.title}}
   </ion-item>
 </ion-list>
-
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button [routerLink]="['/new-place']">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>

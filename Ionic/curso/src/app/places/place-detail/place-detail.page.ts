@@ -15,10 +15,12 @@ place:Place
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramap=>{
-      const recipeId=paramap.get('placeId')
+      if(!paramap.has("placeId")){
+        this.router.navigate(['/places']);
+      }
+      const recipeId=paramap.get("placeId")
       this.place = this.placesService.getPlaceById(recipeId)
-      console.log(this.place)
-    })
+    });
   }
 
   async deletePlace(){
@@ -31,14 +33,16 @@ place:Place
       },
       {
         text:'Eliminar', 
-        handler: ()=>{
+        handler: () => {
         this.placesService.deletePlace(this.place.id)
+        console.log("Eliminado")
+        console.log(this.placesService.getPlaces())
         this.router.navigate(['/places'])
        }
       }
     ]
     });
-   await alertElement.present();
+    await alertElement.present();
     
   }
 

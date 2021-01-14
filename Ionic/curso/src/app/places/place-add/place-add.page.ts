@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlacesService } from '../places.service';
 
 @Component({
   selector: 'app-place-add',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaceAddPage implements OnInit {
 
-  constructor() { }
+  constructor(private placeService:PlacesService) { }
 
   ngOnInit() {
+  }
+  savePlace(title,url){
+    this.placeService.addPlace(title.value,url.value)
   }
 
 }
