@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>place-add</ion-title>
+    <ion-title>Agregar Place</ion-title>
+    <ion-buttons color="dark" slot="start">
+      <ion-back-button color="dark" defaultHref="/places">
+      </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-input type="text" placeholder="Ingrese el titulo" #title></ion-input>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-input type="text" placeholder="Ingrese el url" #url></ion-input>
+          <ion-button color="primary" (click)="savePlace(title,url)" [routerLink]="['/places']">Guardar</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 </ion-content>
