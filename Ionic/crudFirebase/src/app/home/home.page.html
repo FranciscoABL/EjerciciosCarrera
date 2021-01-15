@@ -15,14 +15,14 @@
     </ion-item>
     <div>
       <ion-list>
-        <ion-item *ngFor="let item of taskList;let i=index">
+        <ion-item *ngFor="let item of taskList">
           {{item.title}}
           <div slot="end" class="item-note" item-end>
-            <ion-button  color="danger" (click)="deleteTask(i)">
+            <ion-button  color="danger" (click)="deleteTask(item.id)">
               <ion-icon  clear name="trash"></ion-icon>
             </ion-button>
               
-            <ion-button color="warning" (click)="updateTask(i)">
+            <ion-button color="warning" (click)="updateTask(item.id)">
               <ion-icon clear name="create"></ion-icon>
             </ion-button>
           </div>
