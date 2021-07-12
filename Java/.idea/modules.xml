@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Estructura De Datos/Arreglos 1/Arreglos 1.iml" filepath="$PROJECT_DIR$/Estructura De Datos/Arreglos 1/Arreglos 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Estructura De Datos/Control_Escolar/Control_Escolar.iml" filepath="$PROJECT_DIR$/Estructura De Datos/Control_Escolar/Control_Escolar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EjerciciosCarrera.iml" filepath="$PROJECT_DIR$/EjerciciosCarrera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Estructura De Datos/Numeros/Numeros.iml" filepath="$PROJECT_DIR$/Estructura De Datos/Numeros/Numeros.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Estructura De Datos/ProyectoBanco/ProyectoBanco.iml" filepath="$PROJECT_DIR$/Estructura De Datos/ProyectoBanco/ProyectoBanco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Estructura De Datos/programa/programa.iml" filepath="$PROJECT_DIR$/Estructura De Datos/programa/programa.iml" />
+    </modules>
+  </component>
+</project>
