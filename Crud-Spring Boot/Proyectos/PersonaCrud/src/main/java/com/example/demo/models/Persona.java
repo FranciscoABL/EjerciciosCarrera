@@ -41,6 +41,9 @@ public class Persona {
         this.pais = pais;
         this.estado = estado;
     }
+    public Persona(){
+        
+    }
 
     public Long getId() {
         return id;

@@ -26,7 +26,9 @@ public class Pais {
     public Pais(String nombre) {
         this.nombre = nombre;
     }
-    
+    public Pais(){
+        
+    }
     public Long getId() {
         return id;
     }
